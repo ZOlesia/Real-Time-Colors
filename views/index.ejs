@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script>
+        $(document).ready(function(){
+            var socket = io();
+            $('button').on('click', function()
+            {
+                var color = $(this).text();
+                console.log(color);
+                socket.emit('change_color', color);
+            })
+
+            socket.on('background_color', function(data){
+                console.log(data);
+                $('body').css('background-color', data);
+            })
+        })
+    </script>
+</head>
+<body style="background-color: beige;">
+    <div class="container">
+        <div class="row mt-5 justify-content-md-center" >
+            <div class="col-md-4">
+                <button id="pink" class="btn btn-lg btn-outline-info" style="width: 100%;">Pink</button>
+            </div>
+            <div class="col-md-4">
+                <button id="blue" class="btn btn-lg btn-outline-info" style="width: 100%;">Lightblue</button>
+            </div>
+            <div class="col-md-4">
+                <button id="purple" class="btn btn-lg btn-outline-info" style="width: 100%;">Purple</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
